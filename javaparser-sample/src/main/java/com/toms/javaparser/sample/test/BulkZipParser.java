@@ -1,4 +1,4 @@
-package com.yourorganization.maven_sample;
+package com.toms.javaparser.sample.test;
 
 import static com.github.javaparser.utils.PositionUtils.sortByBeginPosition;
 
@@ -35,13 +35,15 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.utils.CodeGenerationUtils;
 import com.github.javaparser.utils.Log;
 import com.github.javaparser.utils.Pair;
-import com.github.javaparser.utils.SourceRoot;
 import com.github.javaparser.utils.SourceZip;
+import com.toms.javaparser.model.Cls;
+import com.toms.javaparser.model.Lsi;
+import com.toms.javaparser.model.Mth;
 
 /**
  * Some code that uses JavaParser.
  */
-public class BulkPscParser {
+public class BulkZipParser {
 
     public static void main(String[] args) throws IOException {
         // JavaParser has a minimal logging class that normally logs nothing.
@@ -51,7 +53,7 @@ public class BulkPscParser {
         // SourceRoot is a tool that read and writes Java files from packages on a certain root directory.
         // In this case the root directory is found by taking the root from the current Maven module,
         // with src/main/resources appended.
-        SourceZip sourceRoot = new SourceZip(CodeGenerationUtils.mavenModuleRoot(BulkPscParser.class).resolve("src/main/resources/psc.zip"));
+        SourceZip sourceRoot = new SourceZip(CodeGenerationUtils.mavenModuleRoot(BulkZipParser.class).resolve("src/main/resources/java.zip"));
 
         // Our sample is in the root of this directory, so no package name.
         ParserConfiguration conf = new ParserConfiguration();//.setLanguageLevel(JAVA_9)
@@ -76,11 +78,16 @@ public class BulkPscParser {
 
     	@Override
     	public void visit(final CompilationUnit n, Cls cls) {
-
+    		boolean stop = false;
     		if (n.getPackageDeclaration().isPresent()) {
-    			cls.setPackageName(n.getPackageDeclaration().get().getNameAsString());
+    			if(n.getPackageDeclaration().get().getNameAsString().endsWith("dto")) {
+    				stop = true;
+    			}else {
+    				cls.setPackageName(n.getPackageDeclaration().get().getNameAsString());
+    			}
     		}
-    		super.visit(n, cls);
+    		if( !stop)
+    			super.visit(n, cls);
     	}
 
     	@Override

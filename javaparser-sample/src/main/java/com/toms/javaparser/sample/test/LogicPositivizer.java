@@ -1,4 +1,4 @@
-package com.yourorganization.maven_sample;
+package com.toms.javaparser.sample.test;
 
 import java.nio.file.Paths;
 import java.util.Iterator;
@@ -10,15 +10,12 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.BinaryExpr;
-import com.github.javaparser.ast.expr.Expression;
-import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.Visitable;
-import com.github.javaparser.printer.DefaultPrettyPrinter;
 import com.github.javaparser.printer.DefaultPrettyPrinterVisitor;
 import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration;
 import com.github.javaparser.utils.CodeGenerationUtils;
@@ -55,12 +52,13 @@ public class LogicPositivizer {
         SourceRoot sourceRoot = new SourceRoot(CodeGenerationUtils.mavenModuleRoot(LogicPositivizer.class).resolve("src/main/resources"));
 
         // Our sample is in the root of this directory, so no package name.
-        CompilationUnit cu = sourceRoot.parse("", "GuestbookPsc.java");
+        CompilationUnit cu = sourceRoot.parse("", "CustInqyCLC.java");
 
 
         List list = cu.getChildNodes();
 
         List<ClassOrInterfaceDeclaration> list2 = cu.findAll(ClassOrInterfaceDeclaration.class);
+        List<MethodDeclaration> list4 = cu.findAll(MethodDeclaration.class);
 
 
         DefaultPrinterConfiguration conf = new DefaultPrinterConfiguration();

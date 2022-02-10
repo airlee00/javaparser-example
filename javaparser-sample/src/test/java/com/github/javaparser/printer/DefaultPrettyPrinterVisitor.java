@@ -151,6 +151,7 @@ import com.github.javaparser.ast.type.VoidType;
 import com.github.javaparser.ast.type.WildcardType;
 import com.github.javaparser.ast.visitor.Visitable;
 import com.github.javaparser.ast.visitor.VoidVisitor;
+import com.github.javaparser.printer.SourcePrinter;
 import com.github.javaparser.printer.configuration.ConfigurationOption;
 import com.github.javaparser.printer.configuration.DefaultConfigurationOption;
 import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration.ConfigOption;
@@ -1271,7 +1272,6 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     public void visit(final VariableDeclarationExpr n, final Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
-        System.out.println("-->" + n.getComment());
         if (n.getParentNode().map(ExpressionStmt.class::isInstance).orElse(false)) {
             printMemberAnnotations(n.getAnnotations(), arg);
         } else {

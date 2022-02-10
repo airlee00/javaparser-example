@@ -1,4 +1,4 @@
-package com.yourorganization.maven_sample;
+package com.toms.javaparser.sample.test;
 
 import static com.github.javaparser.utils.PositionUtils.sortByBeginPosition;
 
@@ -30,6 +30,9 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.utils.CodeGenerationUtils;
 import com.github.javaparser.utils.Log;
 import com.github.javaparser.utils.SourceRoot;
+import com.toms.javaparser.model.Cls;
+import com.toms.javaparser.model.Lsi;
+import com.toms.javaparser.model.Mth;
 
 /**
  * Some code that uses JavaParser.

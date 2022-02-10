@@ -10,8 +10,10 @@
     <artifactId>javaparser-maven-sample</artifactId>
     <!-- The version of this project. SNAPSHOT means "we're still working on it" -->
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
+     <failOnMissingWebXml>false</failOnMissingWebXml>
         <!-- Tell Maven we want to use Java 8 -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -26,8 +28,25 @@
             <artifactId>javaparser-core</artifactId>
             <version>3.23.1</version>
         </dependency>
-    </dependencies>
+<!-- https://mvnrepository.com/artifact/org.tmatesoft.svnkit/svnkit -->
+<dependency>
+    <groupId>org.tmatesoft.svnkit</groupId>
+    <artifactId>svnkit</artifactId>
+    <version>1.10.4</version>
+</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId> <version>2.10.5</version>
+		</dependency>
+<!-- https://mvnrepository.com/artifact/org.jetbrains/annotations -->
+<dependency>
+    <groupId>org.jetbrains</groupId>
+    <artifactId>annotations</artifactId>
+    <version>23.0.0</version>
+</dependency>
 
+
+    </dependencies>
     <!-- This blob of configuration tells Maven to make the jar executable. You can run it with:
     mvn clean package
     java -jar target/javaparser-maven-sample-1.0-SNAPSHOT-shaded.jar

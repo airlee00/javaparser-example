@@ -1,4 +1,4 @@
-package com.yourorganization.maven_sample;
+package com.toms.javaparser.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Mth {
 
+	private String modifier;
 	private String methodName ;
 	private String serviceId ;
 	private String serviceName ;
 	private AtomicInteger loc = new AtomicInteger(0);
+	private int locTotal = 0;
 
 	private List<Lsi> api = new ArrayList<>();
 
@@ -57,10 +59,33 @@ public class Mth {
 		this.loc = loc;
 	}
 
+	public String getModifier() {
+		return modifier;
+	}
+
+	public void setModifier(String modifier) {
+		this.modifier = modifier;
+	}
+
+	public int getLocTotal() {
+		return locTotal;
+	}
+
+	public void setLocTotal(int locTotal) {
+		this.locTotal = locTotal;
+	}
+
 	@Override
 	public String toString() {
-		return "Mth [methodName=" + methodName + ", serviceId=" + serviceId + ", serviceName=" + serviceName + ", loc="
-				+ loc + ", api=" + api + "]\n";
+		return "\t" + modifier + "\t" + methodName + "\tserviceId=" + serviceId
+				+ "\tserviceName=" + serviceName + "\twithoutCommentLineSize=" + loc + "\ttotalLine=" + locTotal + "\tapi=" + api + "\n";
 	}
+
+	
+//	@Override
+//	public String toString() {
+//		return "Mth [modifier=" + modifier + ", methodName=" + methodName + ", serviceId=" + serviceId
+//				+ ", serviceName=" + serviceName + ", loc=" + loc + ", api=" + api + "]\n";
+//	}
 
 }

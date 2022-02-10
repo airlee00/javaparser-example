@@ -1,4 +1,4 @@
-package com.yourorganization.maven_sample;
+package com.toms.javaparser.model;
 
 public class Lsi {
 
@@ -18,7 +18,7 @@ public class Lsi {
 	}
 	@Override
 	public String toString() {
-		return "[apiCode=" + apiCode + ", apiUrl=" + apiUrl + "]";
+		return "apiCode=" + apiCode + "\t apiUrl=" + apiUrl ;
 	}
 
 }

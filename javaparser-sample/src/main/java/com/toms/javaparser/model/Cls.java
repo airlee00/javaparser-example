@@ -1,4 +1,4 @@
-package com.yourorganization.maven_sample;
+package com.toms.javaparser.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ public class Cls {
 
 	private String packageName;
 	private String className ;
+	private String comment;
 	private  List<Mth> mths = new ArrayList<>();
 	private  AtomicInteger current = new AtomicInteger(-1);
 	private AtomicInteger loc = new AtomicInteger(0);
@@ -50,9 +51,17 @@ public class Cls {
 	public void setLoc(AtomicInteger loc) {
 		this.loc = loc;
 	}
+	
+	
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	@Override
 	public String toString() {
-		return "Cls [packageName=" + packageName + ", className=" + className + ", current="  + current + ", loc=" + loc + ", mths=\n" + mths + " ]";
+		return packageName + "." + className + "\t methodSize="  + (current.get() + 1) + "\t lineSize=" + loc + "\t comment=" + comment + " \n" + mths + " ";
 	}
 
 }
