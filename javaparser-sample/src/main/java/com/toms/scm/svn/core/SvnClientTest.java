@@ -14,12 +14,13 @@ public class SvnClientTest {
 
         String start = "20220101";//airlee00@gmail.com
         String end = "20220203";//rnekswlhw1!
-
+        System.out.println("start--");
+        long elsp = System.currentTimeMillis();
         Collection<SVNLogEntry> entry =  SvnClient.searchSVN(repository, "trunk/hone-integration-zookeeper", "", "test", start, end);
 
         SvnLogEntrySummary.report(repository, entry, ',', null);
 
-
+        System.out.println("--end (" + (System.currentTimeMillis() - elsp ) + ")");
         System.exit(0);
     }
 
