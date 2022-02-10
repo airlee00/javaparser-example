@@ -30,7 +30,7 @@ public class SvnClient {
     private static String YYYYMMDD = "yyyyMMdd";
 
 	public static Collection<SVNLogEntry> searchSVN(SVNRepository repository, String url, long startRevision, long endRevision,
-			final String searchTerm, final String svnUser, java.util.Date start, java.util.Date end) throws Exception {
+			final String searchTerm, final String svnUser) throws Exception {
 
 		final ArrayList<SVNLogEntry> logEntries = new ArrayList<SVNLogEntry>();
 
@@ -43,10 +43,7 @@ public class SvnClient {
 		            	//}
 						if ( (svnUser == null || svnUser.equals(""))
 								|| svnUser.equals(logEntry.getAuthor())) {
-							boolean check = checkBetween(logEntry.getDate(), start, end);
-							if( check ) {
 								logEntries.add(logEntry);
-							}
 						}
 		            }
 		        });
@@ -56,12 +53,15 @@ public class SvnClient {
 		return logEntries;
 	}
 
-	public static Collection<SVNLogEntry> searchSVN(SVNRepository repository, String url, long startRevision, long endRevision,
+	public static Collection<SVNLogEntry> searchSVN(SVNRepository repository, String url,
 			final String searchTerm, final String svnUser,String start, String end) throws Exception {
 		//DateTimeFormatter formatter =
         Date startDate = DateTimeFormat.forPattern(YYYYMMDD).parseLocalDateTime(start).toDate();
         Date endDate = DateTimeFormat.forPattern(YYYYMMDD).parseLocalDateTime(end).toDate();
-        return searchSVN(repository, url, startRevision,  endRevision, searchTerm, svnUser, startDate,  endDate);
+        long startRevision = repository.getDatedRevision(startDate);
+        long endRevision = repository.getDatedRevision(endDate);
+
+        return searchSVN(repository, url, startRevision,  endRevision, searchTerm, svnUser);
 	}
 
 	public static boolean checkBetween(Date dateToCheck, Date startDate, Date endDate) {
