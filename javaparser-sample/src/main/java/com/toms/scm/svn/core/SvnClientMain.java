@@ -1,6 +1,7 @@
 package com.toms.scm.svn.core;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -9,6 +10,8 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.tmatesoft.svn.core.SVNLogEntry;
 import org.tmatesoft.svn.core.io.SVNRepository;
+
+import com.toms.scm.model.CommitHistory;
 /**
  * ex)
  * java SvnClientMain -p trunk -u 1076001 -s 20210601 -e 20210630  
@@ -69,8 +72,9 @@ public class SvnClientMain {
         SVNRepository repository = RepositoryFactory.getInstance().getRepository();
         Collection<SVNLogEntry> entry =  SvnClient.searchSVN(repository, path, message, username, start, end);
 
-        SvnLogEntrySummary.report(repository, entry, ',', null);
+        List<CommitHistory> historys = SvnLogEntrySummary.report(repository, entry, ',', null);
 
+        System.out.println("historys-----\n" + historys);
         System.out.println("------end-----" + (System.currentTimeMillis() - current));
     }
 
