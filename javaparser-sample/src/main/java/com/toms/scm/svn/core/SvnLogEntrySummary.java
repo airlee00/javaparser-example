@@ -28,8 +28,8 @@ public class SvnLogEntrySummary {
 	}
 
 	public static void print(SVNLogEntry logEntry) {
-		System.out.println(String.format("%5s %2s %10s %2s %10s %10s %10s", logEntry.getRevision(), "|",
-				logEntry.getAuthor(), "|", formatDate(logEntry.getDate()), "", ""));
+		System.out.println(String.format("%5s %2s %10s %2s %10s %10s %16s", logEntry.getRevision(), "|",
+				logEntry.getAuthor(), "|", formatDate(logEntry.getDate()), "", logEntry.getMessage()));
 	}
 
 	public static void print(SVNRepository repository, SVNLogEntry logEntry, SVNLogEntryPath entryPath) {
@@ -37,6 +37,7 @@ public class SvnLogEntrySummary {
 			DiffResult dr = SvnClient.diff(repository, entryPath.getPath(), logEntry.getRevision());
 			String a = String.format("%33s %10s %10d %2s %40s"," ", "|", dr.getLine(), "|", entryPath.getType() + " " + entryPath.getPath() ) ;
 			System.out.println( a) ;
+			//System.out.println(dr.getContents());
 		}
 	}
 

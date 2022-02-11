@@ -12,11 +12,9 @@
 package com.toms.scm.svn.example;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.joda.time.format.DateTimeFormat;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNLogEntry;
 import org.tmatesoft.svn.core.SVNLogEntryPath;
@@ -198,14 +196,6 @@ public class History {
                     + url + "': " + svne.getMessage());
             System.exit(1);
         }
-        Date d  = DateTimeFormat.forPattern("yyyyMMdd").parseLocalDateTime("20220128").toDate();
-        try {
-			long l = repository.getDatedRevision(d);
-			System.out.println("---------------------------------------------" + l);
-		} catch (SVNException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
         for (Iterator entries = logEntries.iterator(); entries.hasNext();) {
             /*
              * gets a next SVNLogEntry
