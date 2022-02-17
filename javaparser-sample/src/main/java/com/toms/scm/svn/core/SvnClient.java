@@ -7,7 +7,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -57,11 +56,11 @@ public class SvnClient {
 		return logEntries;
 	}
 
-	public static Collection<SVNLogEntry> searchSVN(SVNRepository repository, String url, 
+	public static Collection<SVNLogEntry> searchSVN(SVNRepository repository, String url,
 			final String searchTerm, final String svnUser,String start, String end) throws Exception {
 		//DateTimeFormatter formatter =
-        Date startDate = DateTimeFormat.forPattern(YYYYMMDD).parseLocalDateTime(start).toDate();
-        Date endDate = DateTimeFormat.forPattern(YYYYMMDD).parseLocalDateTime(end).toDate();
+        Date startDate = DateTimeFormat.forPattern(YYYYMMDD).parseLocalDateTime(start).plusHours(24).toDate();
+        Date endDate = DateTimeFormat.forPattern(YYYYMMDD).parseLocalDateTime(end).plusHours(24).toDate();
         long s = repository.getDatedRevision(startDate);
         long e = repository.getDatedRevision(endDate);
         System.out.println(s +"~" + e);
@@ -91,7 +90,7 @@ public class SvnClient {
 		    if(preLog != null)
 		    	return runDiff(repository, path, srcRevision, preLog.getRevision());
 		    else
-		    	return runDiff(repository, path, srcRevision, preLog.getRevision() );
+		    	return runDiff(repository, path, srcRevision, repository.getLatestRevision() );
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

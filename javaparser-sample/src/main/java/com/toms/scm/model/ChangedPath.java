@@ -2,7 +2,7 @@ package com.toms.scm.model;
 
 public class ChangedPath {
 
-	private String path;
+	private String path ="";
 	private DiffResult diffResult;
 	private char type;
 	public String getPath() {
@@ -35,6 +35,6 @@ public class ChangedPath {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
+
 }

@@ -11,12 +11,14 @@ import org.apache.commons.cli.Options;
 import org.tmatesoft.svn.core.SVNLogEntry;
 import org.tmatesoft.svn.core.io.SVNRepository;
 
+import com.toms.scm.io.CommitHistoryReporter;
+import com.toms.scm.io.ConsoleSvnlogEntryCommitHistoryReporter;
 import com.toms.scm.model.CommitHistory;
 /**
  * ex)
- * java SvnClientMain -p trunk -u 1076001 -s 20210601 -e 20210630  
- * 
- * @author 
+ * java SvnClientMain -p trunk -u 1076001 -s 20210601 -e 20210630
+ *
+ * @author
  *
  */
 public class SvnClientMain {
@@ -43,7 +45,7 @@ public class SvnClientMain {
 
 		CommandLineParser clp = new DefaultParser();
 		try {
-			CommandLine command = clp.parse(options, args);		
+			CommandLine command = clp.parse(options, args);
 			if(command.hasOption("p")) {
 				path = command.getOptionValue("p");
 			}
@@ -59,22 +61,24 @@ public class SvnClientMain {
 			if(command.hasOption("e")) {
 				end = command.getOptionValue("e");
 			}
-			
+
 		}catch(Exception pe) {
 			System.out.println("아규면트 오류 입니다:");
 			System.out.println(pe.getMessage());
 			System.exit(0);
-		}		
-			
+		}
+
 		long current = System.currentTimeMillis();
 		System.out.print("------start-----");
-		
-        SVNRepository repository = RepositoryFactory.getInstance().getRepository();
+
+        SVNRepository repository = SingleRepositoryFactory.getInstance().getRepository();
         Collection<SVNLogEntry> entry =  SvnClient.searchSVN(repository, path, message, username, start, end);
 
-        List<CommitHistory> historys = SvnLogEntrySummary.report(repository, entry, ',', null);
+        CommitHistoryReporter reporter = new ConsoleSvnlogEntryCommitHistoryReporter();
+        @SuppressWarnings("unused")
+		List<CommitHistory> historys = reporter.report(repository, entry, ',', null);
 
-        System.out.println("historys-----\n" + historys);
+        //System.out.println("historys-----\n" + historys);
         System.out.println("------end-----" + (System.currentTimeMillis() - current));
     }
 

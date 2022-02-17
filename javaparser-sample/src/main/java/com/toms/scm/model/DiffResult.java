@@ -27,7 +27,8 @@ public class DiffResult {
 	}
 	@Override
 	public String toString() {
-		return "DiffResult [contents=" + contents + ", line=" + line + "]";
+		//return "DiffResult [contents=" + contents + ", line=" + line + "]";
+		return "DiffResult [ line=" + line + "]";
 	}
 
 
